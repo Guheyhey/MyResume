@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MyEZResume</string>
+    <string name="user_picture">User Picture</string>
+    <string name="edit_basic_info">Edit Basic Info</string>
+
+    <string name="action_delete">Delete</string>
+    <string name="action_save">Save</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="section_education">Education</string>
+    <string name="add_education">Add Education</string>
+    <string name="edit_education">Edit Education</string>
+
+    <string name="education_school">School</string>
+    <string name="education_major">Major</string>
+    <string name="education_start_date">Start Date(mm/yyyy)</string>
+    <string name="education_end_date">End Date(mm/yyyy)</string>
+    <string name="education_courses">Courses</string>
+</resources>
