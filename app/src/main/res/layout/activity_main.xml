@@ -1,0 +1,64 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_medium"
+    tools:context="com.example.joegl.myezresume.MainActivity">
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:id="@+id/user_name_layout"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@+id/user_picture"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="@dimen/spacing_xsmall">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Joe Liao"
+                android:textSize="@dimen/name_text_size"/>
+
+            <ImageButton
+                android:id="@+id/edit_basic_info"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_xsmall"
+                android:src="@drawable/ic_mode_edit_black_24px"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@string/edit_basic_info"/>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/user_picture"
+            android:layout_height="@dimen/user_picture_size"
+            android:layout_width="@dimen/user_picture_size"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/avatar"
+            android:contentDescription="@string/user_picture"/>
+        <TextView
+            android:id="@+id/email"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="joeglancith@hotmail.com"
+            android:layout_below="@+id/user_name_layout"
+            android:layout_toLeftOf="@+id/user_picture"
+            android:layout_alignParentLeft="true"/>
+    </RelativeLayout>
+
+
+
+</LinearLayout>
+
+
+
