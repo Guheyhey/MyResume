@@ -16,6 +16,8 @@ public class BasicInfo implements Parcelable{
 
     public Uri imageUri;
 
+    public BasicInfo() {};
+
     protected BasicInfo(Parcel in) {
         name = in.readString();
         email = in.readString();
