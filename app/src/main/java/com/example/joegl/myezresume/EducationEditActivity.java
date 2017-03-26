@@ -3,11 +3,13 @@ package com.example.joegl.myezresume;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 import com.example.joegl.myezresume.R;
@@ -20,56 +22,65 @@ import java.util.Arrays;
  * Created by joegl on 2017/3/24.
  */
 
-public class EducationEditActivity extends AppCompatActivity {
+public class EducationEditActivity extends EditBaseActivity<Education> {
     public static final String KEY_EDUCATION = "education";
-    private Education education;
+    public static final String KEY_EDUCATION__ID = "education_id";
+    
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_education_edit);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    protected int getLayoutID() {
+        return R.layout.activity_education_edit;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())   {
-            case android.R.id.home:
-                finish();
-                return true;
-            case R.id.ic_save:
-                saveAndExit();
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    protected void setupUIForCreate() {
+        findViewById(R.id.education_delete_btn).setVisibility(View.GONE);
     }
 
-    private void saveAndExit() {
-        if (education == null) {
-            education = new Education();
+    @Override
+    protected void setupUIForEdit(@NonNull Education data) {
+        ((EditText) findViewById(R.id.education_edit_school))
+                .setText(data.school);
+        ((EditText) findViewById(R.id.education_edit_major))
+                .setText(data.major);
+        ((EditText) findViewById(R.id.education_edit_start_date))
+                .setText(DateUtil.dateToString(data.startDate));
+        ((EditText) findViewById(R.id.education_edit_end_date))
+                .setText(DateUtil.dateToString(data.endDate));
+        ((EditText) findViewById(R.id.education_edit_courses))
+                .setText(TextUtils.join("\n", data.courses));
+    }
+
+    @Override
+    protected void saveAndExit(@NonNull Education data) {
+        if (data == null) {
+            data = new Education();
         }
-        education.school = ((EditText) findViewById(R.id.education_edit_school))
+        data.school = ((EditText) findViewById(R.id.education_edit_school))
                 .getText().toString();
-        education.major = ((EditText) findViewById(R.id.education_edit_major))
+        data.major = ((EditText) findViewById(R.id.education_edit_major))
                 .getText().toString();
-        education.startDate = DateUtil.stringToDate(((EditText)
+        data.startDate = DateUtil.stringToDate(((EditText)
                 findViewById(R.id.education_edit_start_date)).getText().toString());
-        education.endDate = DateUtil.stringToDate(((EditText)
+        data.endDate = DateUtil.stringToDate(((EditText)
                 findViewById(R.id.education_edit_end_date)).getText().toString());
-        education.courses = Arrays.asList(TextUtils.split(((EditText)
+        data.courses = Arrays.asList(TextUtils.split(((EditText)
                 findViewById(R.id.education_edit_courses)).getText().toString(), "\n"));
 
         Intent resultIntent = new Intent();
-        resultIntent.putExtra(KEY_EDUCATION, education);
+        resultIntent.putExtra(KEY_EDUCATION, data);
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
 
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_edit, menu);
-        return true;
+    protected Education initializeData() {
+        return getIntent().getParcelableExtra(KEY_EDUCATION);
     }
+    
+
+
+
+
 }
