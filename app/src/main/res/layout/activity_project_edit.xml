@@ -43,7 +43,7 @@
         android:hint="@string/project_description"/>
 
     <TextView
-        android:id="@+id/experience_delete_btn"
+        android:id="@+id/project_delete_btn"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="right"

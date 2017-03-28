@@ -28,6 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="date"
             android:hint="@string/education_start_date"/>
 
         <EditText
@@ -35,6 +36,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="date"
             android:hint="@string/education_end_date"/>
 
     </LinearLayout>
@@ -52,11 +54,7 @@
         android:layout_gravity="right"
         android:layout_marginTop="12dp"
         android:text="@string/action_delete"
-        android:padding="@dimen/spacing_small"
-        android:background="?attr/selectableItemBackground"
-        android:textAllCaps="true"
-        android:textColor="#FF4081"
-        android:textStyle="bold"/>
+        style="@style/AppTheme.TextView.DeleteButton"/>
 
 
 

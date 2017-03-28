@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context="com.example.joegl.myezresume.util.MainActivity">
+    tools:context="com.example.joegl.myezresume.MainActivity">
 
     <LinearLayout
         android:layout_height="match_parent"
@@ -93,6 +93,70 @@
             android:layout_width="match_parent"
             android:orientation="vertical"/>
 
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginBottom="@dimen/spacing_small">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/section_project"
+                android:textSize="@dimen/caption_text_size"
+                android:textAllCaps="true"/>
+
+            <ImageButton
+                android:id="@+id/add_project_button"
+                android:layout_height="@dimen/icon_button_size"
+                android:layout_width="@dimen/icon_button_size"
+                android:src="@drawable/ic_add_black_24px"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@string/add_project"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/project_list"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"/>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginBottom="@dimen/spacing_small">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/section_experience"
+                android:textSize="@dimen/caption_text_size"
+                android:textAllCaps="true"/>
+
+            <ImageButton
+                android:id="@+id/add_experience_button"
+                android:layout_height="@dimen/icon_button_size"
+                android:layout_width="@dimen/icon_button_size"
+                android:src="@drawable/ic_add_black_24px"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@string/add_experience"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/experience_list"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"/>
 
     </LinearLayout>
 </ScrollView>
