@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">MyEZResume</string>
+    <string name="app_name">EasyResume</string>
     <string name="user_picture">User Picture</string>
     <string name="edit_basic_info">Edit Basic Info</string>
+
+    <string name="choose_user_picture">Choose user picture</string>
+    <string name="basic_info_edit_email_hint">Your email</string>
+    <string name="basic_info_edit_name_hint">Your name</string>
 
     <string name="action_delete">Delete</string>
     <string name="action_save">Save</string>
@@ -16,4 +20,24 @@
     <string name="education_start_date">Start Date(mm/yyyy)</string>
     <string name="education_end_date">End Date(mm/yyyy)</string>
     <string name="education_courses">Courses</string>
+
+    <string name="section_project">Project</string>
+    <string name="add_project">Add Project</string>
+    <string name="edit_project">Edit Project</string>
+
+    <string name="project_name">Project Name</string>
+    <string name="project_start_date">Start Date(mm/yyyy)</string>
+    <string name="project_end_date">End Date(mm/yyyy)</string>
+    <string name="project_description">Details</string>
+
+    <string name="section_experience">Experience</string>
+    <string name="add_experience">Add experience</string>
+    <string name="edit_experience">Edit experience</string>
+
+    <string name="experience_company">Company</string>
+    <string name="experience_title">Title</string>
+    <string name="experience_start_date">Start Date(mm/yyyy)</string>
+    <string name="experience_end_date">End Date(mm/yyyy)</string>
+    <string name="experience_description">Details</string>
+
 </resources>

@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,9 @@ import com.example.joegl.myezresume.model.Education;
 import com.example.joegl.myezresume.model.Experience;
 import com.example.joegl.myezresume.model.Project;
 import com.example.joegl.myezresume.util.DateUtil;
+import com.example.joegl.myezresume.util.ImageUtils;
+import com.example.joegl.myezresume.util.ModelUtils;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        fakeData();
+        //fakeData();
+        loadData();
         setupUI();
 
     }
@@ -96,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
             Log.i("JoeLiaoDemo", "ok");
             switch (requestCode) {
                 case REQ_CODE_EDIT_BASIC_INFO:
-                    //BasicInfo basicInfo = data.getParcelableExtra(BasicInfoEditActivity.KEY_BASIC_INFO);
-                    updateBasicInfo();
+                    BasicInfo basicInfo = data.getParcelableExtra(BasicInfoEditActivity.KEY_BASIC_INFO);
+                    updateBasicInfo(basicInfo);
                     break;
 
                 case REQ_CODE_EDIT_EDUCATION:
@@ -139,8 +144,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupBasicInfo() {
-        ((TextView) findViewById(R.id.name)).setText(basicInfo.name);
-        ((TextView) findViewById(R.id.email)).setText(basicInfo.email);
+        ((TextView) findViewById(R.id.name)).setText(TextUtils.isEmpty(basicInfo.name)
+                                                        ? "Your Name"
+                                                        : basicInfo.name);
+        ((TextView) findViewById(R.id.email)).setText(TextUtils.isEmpty(basicInfo.email)
+                                                        ? "Your email"
+                                                        : basicInfo.email);
+
+        ImageView userPicture = (ImageView) findViewById(R.id.user_picture);
+        if (basicInfo.imageUri != null) {
+            ImageUtils.loadImage(this, basicInfo.imageUri, userPicture);
+        } else {
+            userPicture.setImageResource(R.drawable.rotk);
+        }
+
+        findViewById(R.id.edit_basic_info).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, BasicInfoEditActivity.class);
+                intent.putExtra(BasicInfoEditActivity.KEY_BASIC_INFO, basicInfo);
+                startActivityForResult(intent, REQ_CODE_EDIT_BASIC_INFO);
+            }
+        });
     }
 
 
@@ -234,8 +259,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void updateBasicInfo() {
+    private void loadData() {
+        BasicInfo savedBasicInfo = ModelUtils.read(this,
+                                                   MODEL_BASIC_INFO,
+                                                   new TypeToken<BasicInfo>(){});
+        basicInfo = (savedBasicInfo == null ? new BasicInfo() : savedBasicInfo);
 
+        List<Education> savedEducation = ModelUtils.read(this,
+                                                         MODEL_EDUCATIONS,
+                                                         new TypeToken<List<Education>>(){});
+        educations = (savedEducation == null ? new ArrayList<Education>() : savedEducation);
+
+        List<Experience> savedExperience = ModelUtils.read(this,
+                                                          MODEL_EXPERIENCES,
+                                                          new TypeToken<List<Experience>>(){});
+        experiences = (savedExperience == null ? new ArrayList<Experience>() : savedExperience);
+
+        List<Project> savedProject = ModelUtils.read(this,
+                                                     MODEL_PROJECTS,
+                                                     new TypeToken<List<Project>>(){});
+        projects = (savedProject == null ? new ArrayList<Project>() : savedProject);
+
+
+    }
+
+    private void updateBasicInfo(BasicInfo basicInfo) {
+        ModelUtils.save(this, MODEL_BASIC_INFO, basicInfo);
+        this.basicInfo = basicInfo;
+        setupBasicInfo();
     }
 
     private void updateEducation(Education education) {
@@ -251,6 +302,8 @@ public class MainActivity extends AppCompatActivity {
         if (!found) {
             educations.add(education);
         }
+
+        ModelUtils.save(this, MODEL_EDUCATIONS, educations);
         setupEducations();
     }
 
@@ -279,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
         if (!found) {
             projects.add(project);
         }
+        ModelUtils.save(this, MODEL_PROJECTS, projects);
         setupProjects();
     }
 
@@ -306,6 +360,7 @@ public class MainActivity extends AppCompatActivity {
         if (!found) {
             experiences.add(experience);
         }
+        ModelUtils.save(this, MODEL_EXPERIENCES, experiences);
         setupExperiences();
     }
 
@@ -333,7 +388,7 @@ public class MainActivity extends AppCompatActivity {
         return sb.toString();
     }
 
-    private void loadData() {}
+
 
     private void fakeData() {
         basicInfo = new BasicInfo();

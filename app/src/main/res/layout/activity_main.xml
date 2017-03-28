@@ -12,6 +12,7 @@
         android:padding="@dimen/spacing_medium">
 
         <RelativeLayout
+            android:id="@+id/edit_basic_info"
             android:layout_height="wrap_content"
             android:layout_width="match_parent">
 
@@ -32,7 +33,6 @@
                     android:textSize="@dimen/caption_text_size"/>
 
                 <ImageButton
-                    android:id="@+id/edit_basic_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/spacing_xsmall"
