@@ -22,7 +22,7 @@ public class DateUtil {
             return sdf.parse(dateString);
         } catch (ParseException e) {
             e.printStackTrace();
-            return new Date(0);
+            return new Date();
         }
     }
 }
