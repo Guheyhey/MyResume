@@ -4,22 +4,20 @@ package com.example.joegl.myezresume.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.joegl.myezresume.util.DateUtil;
-
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by joegl on 2017/3/26.
- */
-
 public class Project implements Parcelable {
 
     public String id;
+
     public String projectName;
+
     public Date startDate;
+
     public Date endDate;
+
     public List<String> details;
 
     public Project() {
@@ -29,8 +27,8 @@ public class Project implements Parcelable {
     protected Project(Parcel in) {
         id = in.readString();
         projectName = in.readString();
-        startDate = DateUtil.stringToDate(in.readString());
-        endDate = DateUtil.stringToDate(in.readString());
+        startDate = new Date(in.readLong());
+        endDate = new Date(in.readLong());
         details = in.createStringArrayList();
     }
 
@@ -55,8 +53,8 @@ public class Project implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
         dest.writeString(projectName);
-        dest.writeString(DateUtil.dateToString(startDate));
-        dest.writeString(DateUtil.dateToString(endDate));
+        dest.writeLong(startDate.getTime());
+        dest.writeLong(endDate.getTime());
         dest.writeStringList(details);
     }
 }
